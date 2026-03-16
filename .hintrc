@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "iframe[loading]",
+          "iframe[referrerpolicy=no-referrer-when-downgrade]"
+        ]
+      }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "backdrop-filter"
+        ]
+      }
+    ],
+    "no-inline-styles": "off",
+    "disown-opener": "off"
+  }
+}

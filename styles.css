@@ -1,0 +1,1249 @@
+:root{
+  --bg: #F7F1E8;
+  --paper: #FFFFFF;
+  --text: #2B2B2B;
+  --muted: rgba(43,43,43,.75);
+  --choco: #4B2E21;
+  --choco2:#6B3E2E;
+  --caramel:#B8926A;
+  --radius: 20px;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --max: 980px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.55;
+}
+
+.container{
+  width: min(var(--max), calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.center{ text-align:center; }
+.mt-12{ margin-top:12px; }
+
+/* HERO BASE */
+.hero{
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  background: url("assets/hero.jpg") center center / cover no-repeat;
+}
+
+.hero__overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.55));
+}
+
+/* CONTENT LAYOUT: TOP / MID / BOTTOM */
+.hero__content{
+  position: relative;
+  z-index: 1;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+  color: #fff;
+
+  padding: 56px 20px 28px;
+}
+
+/* TOP */
+.hero__top{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.monogram{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.65);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  letter-spacing: .12em;
+
+  opacity: 0;
+  animation: fadeDown 1s ease forwards;
+}
+
+/* ІВАН & МІЛЕНА В ОДИН РЯДOK */
+.names{
+  margin: 0;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: inline-block;
+
+  opacity: 0;
+  transform: translate3d(0,-22px,0); /* замість translateY */
+  will-change: transform, opacity;
+
+  /* анти-артефакти */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  filter: blur(0); /* часто прибирає "привид" */
+
+  animation: namesDrop 4s cubic-bezier(.16,1,.3,1) forwards;
+  animation-delay: .35s;
+}
+
+@keyframes namesDrop{
+  to{
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+}
+
+/* тонка лінія під іменами */
+.names-line{
+  width: 140px;
+  height: 1px;
+  background: rgba(255,255,255,.85);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: lineReveal 1.1s ease forwards;
+  animation-delay: .5s;
+}
+
+@keyframes lineReveal{
+  to{ opacity: 1; transform: scaleX(1); }
+}
+
+.names::before,
+.names::after{
+  content: none !important;
+}
+
+/* MIDDLE (КНОПКА ПО ЦЕНТРУ) */
+.hero__mid{
+  flex: 1;                  /* займає весь вільний простір */
+  display: flex;
+  align-items: center;      /* вертикально по центру */
+  justify-content: center;
+}
+
+/* BOTTOM (ЦИТАТА ВНИЗУ) */
+.hero__bottom{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: auto;      /* клеїть вниз */
+  padding-bottom: 10px;  /* ще нижче/вище регулюєш тут */
+   opacity: 0;
+  transform: translateY(40px);
+
+  animation: fadeUp 1.8s cubic-bezier(.16,1,.3,1) forwards;
+  animation-delay: 1.2s; /* зʼявляється після імен */
+}
+
+.quote{
+  max-width: 720px;
+  line-height: 1.6;
+  font-size: 14px;
+  color: #fff;
+}
+
+.quote-ref{
+  font-size: 13px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .85;
+  color: rgba(255,255,255,.75);
+}
+
+/* Мобілка: трішки менші відступи */
+@media (max-width: 480px){
+  .hero__content{ padding: 44px 16px 22px; }
+  .names{ letter-spacing: .14em; font-size: 20px; }
+  .names-line{ width: 120px; }
+  .quote{ font-size: 13px; }
+}
+
+/* верхній блок */
+.hero__main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* футер з цитатою */
+.hero__footer{
+  margin-top: auto;      /* клеїть вниз */
+  padding-bottom: 10px;  /* ще нижче/вище регулюєш тут */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* spacer тепер реально забирає вільний простір */
+.spacer{
+  flex: 1;
+  min-height: 48px;          /* мін. відступ від кнопки */
+}
+
+
+.hero__logo{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.65);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  letter-spacing: .12em;
+  margin-bottom: 18px;
+}
+
+.hero__title{
+  margin: 0;
+  letter-spacing: .18em;
+}
+
+.hero__actions{
+  margin-top: 18px;
+}
+
+.hero__cite{
+  display: inline-block;
+  margin-top: 6px;
+  opacity: .85;
+  font-size: 13px;
+}
+
+/* Плавна поява тексту */
+.fade-in{
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeUp .9s ease forwards;
+}
+@keyframes fadeUp{
+  to { opacity:1; transform: translateY(0); }
+}
+
+
+@keyframes fadeUp{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.names::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+
+  width: 140px;
+  height: 1px;
+  background: rgba(255,255,255,0.85);
+
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+
+  opacity: 0;
+  animation: lineReveal 1.2s ease forwards;
+  animation-delay: 0.8s; /* з’являється після тексту */
+}
+
+.subtitle{
+  margin: 14px auto 0;
+  max-width: 720px;
+  font-size: 16px;
+  color: rgba(255,255,255,.88);
+}
+
+.dateblock{ margin-top: 18px; }
+.date{
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #fff;
+}
+.time{
+  margin-top: 4px;
+  font-size: 14px;
+  color: rgba(255,255,255,.82);
+}
+
+.cta{
+  margin-top: 20px;
+  display:flex;
+  gap: 14px;
+  justify-content:center;
+  flex-wrap: wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform .08s ease, background .2s ease, border-color .2s ease, color .2s ease;
+  min-width: 230px;
+}
+.btn:active{ transform: translateY(1px); }
+
+.btn-solid{
+  background: #fff;
+  color: var(--choco);
+}
+.btn-solid:hover{
+  background: rgba(255,255,255,.88);
+}
+
+.btn-outline{
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255,255,255,.55);
+}
+.btn-outline:hover{
+  border-color: #fff;
+  background: rgba(255,255,255,.12);
+}
+
+.btn-sm{
+  min-width: auto;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.divider{
+  height: 1px;
+  width: min(520px, 100%);
+  margin: 36px auto 0;
+}
+.divider--light{
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+}
+
+.section{ padding: 44px 0; }
+
+.section-white{
+  background: #fff;
+}
+
+.section.alt{
+  background: rgba(255,255,255,.55);
+  border-top: 1px solid rgba(75,46,33,.08);
+  border-bottom: 1px solid rgba(75,46,33,.08);
+}
+
+.h2{
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--choco);
+  font-size: 30px;
+  margin: 0 0 18px;
+  text-align:center;
+}
+
+
+/* Countdown */
+.countdown{
+  margin-top: 14px;
+  display:flex;
+  gap: 10px;
+  justify-content:center;
+  flex-wrap: wrap;
+}
+.cd{
+  min-width: 110px;
+  padding: 12px 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(75,46,33,.10);
+  background: rgba(247,241,232,.55);
+  text-align:center;
+}
+.cd__num{
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--choco);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  text-align: center;
+}
+.cd__lbl{
+  font-size: 12px;
+  color: rgba(43,43,43,.75);
+}
+
+#rsvp .h2 {
+  margin-top: 70px;
+  margin-bottom: 65px;
+}
+
+#rsvp p {
+  margin-bottom: 50px;
+}
+
+.rsvp-btn{
+  display:inline-block;
+  margin:25px auto;
+  padding:12px 22px;
+
+  border-radius:30px;
+  border:1px solid #d8d5ce;
+  background:#f6f4f1;
+
+  font-size:14px;
+  letter-spacing:0.5px;
+  color:#5b5b5b;
+
+  text-align:center;
+  text-decoration:none;
+
+  max-width:260px;
+
+  transition:all .25s ease;
+}
+
+.rsvp-btn:hover{
+  background:#ece9e2;
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+
+.rsvp-btn:active{
+  transform:translateY(0);
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+
+.rsvp-actions{
+  display: flex;
+  justify-content: center;
+}
+
+.hint{
+  font-size: 13px;
+  color: var(--muted);
+  text-align:center;
+}
+/* Плавне появлення форми */
+.form-embed {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+/* Коли активна */
+.form-embed.is-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Щоб iframe виглядав акуратно */
+.form-embed iframe {
+  width: 100%;
+  height: 620px;        /* можеш змінити */
+  border: 0;
+  border-radius: 16px;  /* під стиль карток */
+}
+.hr{
+  margin: 18px 0;
+  border: 0;
+  height: 1px;
+  background: rgba(75,46,33,.12);
+}
+.small{ font-size: 13px; }
+
+.footer{
+  margin-top: 18px;
+  text-align:center;
+  padding-bottom: 20px;
+}
+.backtop{
+  color: var(--choco);
+  text-decoration:none;
+  border-bottom: 1px dashed rgba(75,46,33,.35);
+}
+.backtop:hover{ border-bottom-style: solid; }
+
+/* Dresscode image slot */
+.img-slot{
+  border-radius: 16px;
+  overflow:hidden;
+  border: 1px solid rgba(75,46,33,.12);
+  background: rgba(247,241,232,.40);
+  min-height: 320px;
+  position: relative;
+  display:flex;
+  align-items:stretch;
+  justify-content:stretch;
+}
+.img-slot img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+.img-slot__fallback{
+  padding: 18px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap: 8px;
+  text-align:center;
+}
+.img-slot__title{
+  font-family:"Cormorant Garamond", serif;
+  font-weight: 600;
+  color: var(--choco);
+  font-size: 22px;
+}
+.img-slot__text{ color: var(--muted); }
+
+/* Mobile */
+@media (max-width: 840px){
+  .grid-2{ grid-template-columns: 1fr; }
+}
+@media (max-width: 520px){
+  .hero{ min-height: 88vh; padding-top: 56px; }
+  .btn{ min-width: 100%; }
+  .cd{ min-width: 46%; }
+}
+.hero-quote-ref{
+  margin-top: 8px;
+  opacity: 0.85;
+  font-size: 14px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+}
+
+/* Плавна поява трохи пізніше */
+.fade-in-delay{
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 1.2s ease forwards;
+  animation-delay: 0.6s;
+}
+.when-wrapper{
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+.timer-card .countdown{
+  gap: 14px;
+}
+
+.timer-card .countdown-box{
+  min-width: 60px;
+  padding: 10px 12px;
+  border-radius: 14px;
+}
+
+.timer-card .countdown-box h3{
+  font-size: 18px;
+}
+
+.timer-card .countdown-box span{
+  font-size: 10px;
+}
+
+@media (max-width: 768px){
+  .hero{
+    min-height: 100svh; /* краще за 100vh на мобілках */
+  }
+
+  .hero__content{
+    padding-top: 44px;
+    padding-bottom: 18px; /* мінімальний низ, щоб цитата не прилипла до краю */
+  }
+}
+
+@keyframes fadeDown {
+  0%{
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  0%{
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.calendar{
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.calendar-month{
+  font-size: 14px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  opacity: .6;
+}
+
+.calendar-grid{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 18px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.day-name{
+  font-size: 12px;
+  letter-spacing: .2em;
+  opacity: .5;
+}
+
+.day{
+  position: relative;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.day--love{
+  position: relative;
+  font-weight: 400;
+}
+
+.day--love .heart{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -52%) rotate(-8deg);
+  pointer-events: none;
+  opacity: .95;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.08));
+}
+
+.day--love .heart path{
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: drawHeart 4s ease forwards;
+}
+
+@keyframes drawHeart{
+  to{ stroke-dashoffset: 0; }
+}
+
+.countdown-photo{
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  height: 120px;
+
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  filter: brightness(1.08);
+
+  /* ВАЖЛИВО: тут підстав своє фото */
+  background: url("assets/countdown.jpg") center / cover no-repeat;
+}
+
+.countdown-photo__overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,.15),
+    rgba(0,0,0,.25)
+  );
+}
+
+.countdown-ui{
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+
+  align-self: start;
+  margin-top: 60px;
+}
+
+.countdown-title{
+  font-size: 12px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  opacity: .9;
+  margin-bottom: 18px;
+}
+
+.countdown-min{
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,.18);
+}
+
+.cd-item{
+  display: grid;
+  justify-items: center;
+  min-width: 56px;
+}
+
+.cd-num{
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: .06em;
+}
+
+.cd-label{
+  margin-top: 6px;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+
+.cd-sep{
+  opacity: .65;
+  transform: translateY(-6px);
+}
+
+/* мобілка: фото на екран + таймер компактніший */
+@media (max-width: 768px){
+  .countdown-photo{
+    min-height: 70svh;
+    border-radius: 16px;
+  }
+  .cd-num{ font-size: 28px; }
+  .cd-item{ min-width: 48px; }
+  .countdown-min{ gap: 10px; padding: 12px 14px; }
+}
+
+/* Brush style dress code */
+.dress__text{
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.dress__colors.brush {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.brush-color {
+  width: 60px;
+  height: 28px;
+  background: var(--color);
+  border-radius: 25% 45% 55% 34% / 60% 40% 60% 40%;
+  transform: rotate(-6deg);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.brush-color:nth-child(even) {
+  transform: rotate(6deg);
+}
+
+.brush-color:hover {
+  transform: scale(1.05) rotate(0deg);
+}
+
+.dress__colors.strokes {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.stroke {
+  width: 220px;
+  height: 80px;
+  background-color: var(--color);
+  -webkit-mask-image: var(--img);
+  mask-image: var(--img);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: transform 0.3s ease;
+}
+
+.stroke:hover {
+  transform: scale(1.05);
+}
+
+
+.dress__colors {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.color {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 2px solid rgba(75,46,33,.12);
+}
+
+.color:hover {
+  transform: scale(1.08);
+}
+
+/* ваші кольори */
+.color:nth-child(1) { background: #7a4a2a; }
+.color:nth-child(2) { background: #C2A78F; }
+.color:nth-child(3) { background: #E3CDBB; }
+.color:nth-child(4) { background: #B7C4B0; }
+
+.section-white {
+  position: relative;
+  overflow: visible;
+}
+
+/* Overlay */
+.thanks-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+  z-index: 999;
+}
+
+/* Активний стан */
+.thanks-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Блок */
+.thanks-box {
+  background: #fff;
+  padding: 48px 32px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 340px;
+  width: 90%;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 400ms ease;
+}
+
+/* Анімація появи */
+.thanks-overlay.active .thanks-box {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Текст */
+.thanks-title {
+  font-family: var(--font-title);
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.thanks-text {
+  font-size: 15px;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.thanks-close {
+  background: #f2f2f2;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.thanks-close:hover {
+  background: #e8e8e8;
+}
+
+/* ======================
+   TITLE ANIMATION
+====================== */
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+
+.title-text {
+  transform: translateY(-30px);
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+
+.title-line {
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: #b8b2aa;
+  margin: 16px auto 0;
+
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.8s ease 0.3s;
+}
+
+/* Активний стан */
+.section-title.active .title-text {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.section-title.active .title-line {
+  transform: scaleX(1);
+}
+
+/* Початковий стан */
+.heart-animate {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.6s cubic-bezier(.2,.8,.2,1);
+}
+
+/* Коли активне */
+.heart-animate.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Легка пульсація після появи */
+.heart-animate.active {
+  animation: heartBeat 1.2s ease 0.6s 1;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.15); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.heart-svg path {
+  fill: transparent;
+  stroke: #c77a7a;
+  stroke-width: 1.5;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 1.2s ease;
+}
+
+.heart-svg.active path {
+  stroke-dashoffset: 0;
+}
+
+.heart-svg.active path {
+  animation: fillHeart 0.6s ease 1.2s forwards;
+}
+
+@keyframes fillHeart {
+  to {
+    fill: #c77a7a;
+  }
+}
+
+.heart-svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  margin: 4px auto 0;
+}
+
+.heart-svg path {
+  fill: transparent;
+  stroke: #c77a7a;
+  stroke-width: 1.5;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.heart-svg.active path {
+  stroke-dashoffset: 0;
+}
+
+.day--love{
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.day--love .day-num{
+  position: relative;
+  z-index: 2;
+}
+
+.heart-overlay{
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-45%, -82%); /* трохи вище центру */
+  width: 50px;   /* підганяй розмір */
+  height: 50px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heart-overlay path{
+  fill: transparent;
+  stroke: #b66a6a;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* анімація "обмальовування" */
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  transition: stroke-dashoffset 4s ease;
+}
+
+/* коли активується (через scroll) */
+.day--love.active .heart-overlay path{
+  stroke-dashoffset: 0;
+}
+
+.contact-inst {
+  margin-top: 20px;
+  min-height: 48px;          /* вирівнює по висоті */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.insta-link {
+  margin-left: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #444;
+  transition: opacity 0.3s ease;
+}
+
+.insta-link:hover {
+  opacity: 0.6;
+}
+
+.section-divider {
+  width: 200px;
+  height: 2px;
+  margin: 20px auto;
+  background: linear-gradient(to right, transparent, #d8d2cc, transparent);
+}
+
+.animate-line {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 3s ease;
+}
+
+.animate-line.active {
+  transform: scaleX(1);
+}
+
+.rsvp-heart{
+  text-align:center;
+  font-size:22px;
+  color:#c8b8a6;
+  margin:18px 0;
+}
+
+@media (max-width:600px){
+
+.rsvp-btn{
+  font-size:15px;
+  padding:12px 22px;
+  max-width:220px;
+  width:auto;      /* 👈 це головне */
+  text-align: center;
+  line-height: 1.2;
+}
+
+}
+
+/* PHOTO BLOCK */
+.countdown-photo{
+  /* важливо: прибрати height:100% */
+  height: clamp(420px, 55vw, 560px);  /* на ноуті робить блок вищим */
+  background-repeat: no-repeat;
+  background-size: cover;             /* на ноуті “гарно”, але може кропати */
+  background-position: center 65%;    /* опускаємо кадр нижче (менше ріже голови) */
+  border-radius: 22px;               /* якщо треба */
+}
+
+/* PHONE: показати фото повністю (без обрізання) */
+@media (max-width: 600px){
+  .countdown-photo{
+    background-size: cover !important;   /* головне */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+
+    /* щоб блок не “різався” по висоті */
+    height: auto !important;
+    aspect-ratio: 2 / 3;                  /* під телефон (можеш 4/5 якщо треба) */
+    min-height: 0 !important;
+  }
+}
+
+.location {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.location-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 36px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #6d5c4f;
+  margin-bottom: 28px;
+  position: relative;
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.location-title span {
+  position: relative;
+  display: inline-block;
+}
+
+
+.location-card {
+  background: rgba(104, 77, 77, 0.19);
+  border: 1px solid #ebe2d9;
+  border-radius: 28px;
+  padding: 30px 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+  max-width: 340px;
+  margin: 0 auto;
+
+  opacity: 0;
+  transform: translateY(45px);
+  transition: opacity 0.9s ease, transform 0.9s ease, box-shadow 0.35s ease;
+}
+
+.location-title.show,
+.location-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.location-card:hover {
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.08);
+}
+
+.location-place {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 27px;
+  line-height: 1.25;
+  font-weight: 600;
+  color: #6d5c4f;
+  margin-bottom: 12px;
+}
+
+.location-address {
+  font-size: 15px;
+  color: #8f857d;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.location-time {
+  font-size: 18px;
+  font-weight: 500;
+  color: #6d5c4f;
+  margin-bottom: 22px;
+}
+
+.location-btn {
+  display: inline-block;
+  padding: 13px 28px;
+  border: 1px solid #d8cfc5;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  color: #6d5c4f;
+  background: linear-gradient(180deg, #fffdfb 0%, #f7efe8 100%);
+  box-shadow: 0 6px 14px rgba(109, 92, 79, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.location-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px rgba(109, 92, 79, 0.12);
+  background: linear-gradient(180deg, #fffaf6 0%, #f2e6dc 100%);
+}
+
+.location-btn:active {
+  transform: translateY(0);
+}
+
+.divider {
+  width: 200px;
+  height: 2px;
+  margin: 20px auto;
+  background: linear-gradient(to right, transparent, #d8d2cc, transparent);
+
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 3s ease;
+}
+
+.divider.show {
+  transform: scaleX(1);
+}
