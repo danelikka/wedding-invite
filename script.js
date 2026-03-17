@@ -95,11 +95,12 @@ if (heart) {
   );
 
   heartObserver.observe(heart);
-}
-
+};
 
 document.addEventListener("DOMContentLoaded", () => {
-  const elements = document.querySelectorAll(".location-title, .location-card, .divider");
+  const elements = document.querySelectorAll(
+    ".location-title, .location-card, .divider, .animate"
+  );
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -108,8 +109,59 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, {
-    threshold: 0.2
+    threshold: 0.3
   });
 
   elements.forEach((el) => observer.observe(el));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const elements = document.querySelectorAll(
+    ".location-title, .location-card, .divider, .animate"
+  );
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const elements = document.querySelectorAll(
+    ".location-title, .location-card, .divider"
+  );
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+
+  elements.forEach((el) => observer.observe(el));
+
+  const animatedHeart = document.querySelector(".heart-animate");
+
+  if (animatedHeart) {
+    const heartObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          heartObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    heartObserver.observe(animatedHeart);
+  }
 });
